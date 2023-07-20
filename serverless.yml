@@ -1,0 +1,24 @@
+org: lughwalle
+app: api-kpi
+service: API-kpi
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  httpApi:
+    cors: true
+  environment:
+    DB_HOST: ${param:DB_HOST}
+    DB_NAME: ${param:DB_NAME}
+    DB_USER: ${param:DB_USER}
+    DB_PASSWORD: ${param:DB_PASSWORD}
+
+functions:
+  api:
+    handler: src/app.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-offline
